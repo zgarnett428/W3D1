@@ -92,16 +92,36 @@ class Array
         return rotated_array
     end
 
-    
+    def my_join(separator="")
+        joined = ""
+
+        self.each.with_index do |char, i|
+            if char != self.last
+                joined += char + separator
+            else
+                joined += char
+            end
+        end
+        joined
+    end
+
+    def my_reverse
+        reversed = []
+
+        i = self.length - 1
+        while i >= 0
+            reversed << self[i]
+            i -= 1
+        end
+        reversed
+    end
 
 end
 
+p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
+p [ 1 ].my_reverse               #=> [1]
 
-a = [ "a", "b", "c", "d" ]
-p a.my_rotate         #=> ["b", "c", "d", "a"]
-p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
-p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
-p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
+
 
 
 
