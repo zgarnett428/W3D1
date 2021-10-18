@@ -66,15 +66,42 @@ class Array
         flattened
     end
     
+    def my_zip(*arrays)
+        zip_array = []
+        self.each.with_index do |ele, i|
+            sub_array = [ele]
+            arrays.each do |array|
+                sub_array << array[i] 
+            end
+            zip_array << sub_array
+        end
+        return zip_array
+    end
+
+
+    def my_rotate(rotations=1)
+        rotated_array = []
+        self.each {|ele| rotated_array << ele}
+        if rotations > 0 
+            # push (adds to end) and shift (removes from beginning)
+            rotations.times {rotated_array.push(rotated_array.shift)}                
+        else
+            # pop (removes from end) and unshift (adds to beginning) 
+            (-rotations).times {rotated_array.unshift(rotated_array.pop)}
+        end
+        return rotated_array
+    end
+
+    
+
 end
 
-p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten # => [1, 2, 3, 4, 5, 6, 7, 8]
 
-
-
-
-
-
+a = [ "a", "b", "c", "d" ]
+p a.my_rotate         #=> ["b", "c", "d", "a"]
+p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
+p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
+p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
 
 
 
